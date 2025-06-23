@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "repo-to-rules"
+version = "0.1.0"
+description = "E2E automation to extract repository context and generate Cursor/Claude Code rules"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+anthropic = "^0.40.0"
+pygithub = "^2.4.0"
+langgraph = "^0.2.0"
+langchain = "^0.3.0"
+pydantic = "^2.9.0"
+pydantic-settings = "^2.6.0"
+jinja2 = "^3.1.4"
+rich = "^13.9.0"
+typer = "^0.12.0"
+aiohttp = "^3.10.0"
+python-dotenv = "^1.0.0"
+pyyaml = "^6.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+pytest-asyncio = "^0.24.0"
+black = "^24.0.0"
+isort = "^5.13.0"
+flake8 = "^7.1.0"
+mypy = "^1.13.0"
+
+[tool.poetry.scripts]
+repo-to-rules = "repo_to_rules.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Build command for {{ project_name }}
+
+echo "🔨 Building {{ project_name }}"
+
+{% if 'build' in scripts %}
+{{ scripts.build }}
+{% elif 'npm' in package_managers %}
+npm run build
+{% elif 'poetry' in package_managers %}
+poetry build
+{% elif docker_config %}
+docker build -t {{ project_name.lower() }} .
+{% else %}
+echo "No build command configured"
+exit 1
+{% endif %}
+
+if [ $? -eq 0 ]; then
+    echo "✅ Build completed successfully!"
+else
+    echo "❌ Build failed"
+    exit 1
+fi

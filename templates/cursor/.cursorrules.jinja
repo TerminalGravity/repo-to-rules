@@ -1,0 +1,178 @@
+# {{ project_name }} - Cursor Rules
+
+## Language Settings
+- Primary language: {{ language }}
+- Follow {{ language }} best practices and conventions
+
+## Project Context
+{{ description or "Project developed with modern " + language + " practices" }}
+
+## Code Style
+
+### General Principles
+- Write clean, readable, and maintainable code
+- Follow established patterns in the codebase
+- Prefer explicit over implicit
+- Use meaningful variable and function names
+
+### Naming Conventions
+{% for type, convention in naming_conventions.items() %}
+- {{ type.title() }}: {{ convention }}
+{% endfor %}
+
+{% if language == 'JavaScript' or language == 'TypeScript' %}
+### JavaScript/TypeScript Specific
+- Use TypeScript for type safety when available
+- Prefer `const` and `let` over `var`
+- Use arrow functions for callbacks and short functions
+- Implement proper error handling with try/catch
+- Use async/await over Promises when possible
+- Follow React best practices if React is used
+{% if 'react' in tech_stack %}
+- Use functional components with hooks
+- Implement proper prop validation
+- Follow component composition patterns
+{% endif %}
+
+### Import/Export Conventions
+- Use ES6 import/export syntax
+- Group imports: external libraries, internal modules, relative imports
+- Use named exports for utilities, default exports for main components
+{% endif %}
+
+{% if language == 'Python' %}
+### Python Specific
+- Follow PEP 8 style guidelines
+- Use type hints for function parameters and return values
+- Implement proper exception handling
+- Use list comprehensions when appropriate
+- Follow Python naming conventions (snake_case)
+- Use docstrings for functions and classes
+- Import organization: standard library, third-party, local imports
+{% endif %}
+
+## Architecture Patterns
+{% for pattern in architectural_patterns %}
+- {{ pattern.replace('-', ' ').title() }}
+{% endfor %}
+
+## File Organization
+```
+{{ project_name }}/
+{% for directory in directories %}
+├── {{ directory }}/    # {{ directory_descriptions.get(directory, 'Project files') }}
+{% endfor %}
+```
+
+## Dependencies and Imports
+### Runtime Dependencies
+{% for dep in runtime_deps.keys() %}
+- {{ dep }}
+{% endfor %}
+
+### Preferred Libraries
+{% if 'react' in runtime_deps %}
+- React for UI components
+{% endif %}
+{% if 'express' in runtime_deps %}
+- Express.js for API routes
+{% endif %}
+{% if 'fastapi' in runtime_deps %}
+- FastAPI for API development
+{% endif %}
+{% if 'django' in runtime_deps %}
+- Django for web framework
+{% endif %}
+
+## Testing Guidelines
+{% if testing_frameworks %}
+### Testing Frameworks
+{% for framework in testing_frameworks %}
+- {{ framework }}
+{% endfor %}
+
+### Test Structure
+- Unit tests for individual functions/components
+- Integration tests for feature workflows
+- Follow existing test patterns
+{% if 'jest' in testing_frameworks %}
+- Use Jest for JavaScript testing
+- Mock external dependencies appropriately
+{% endif %}
+{% if 'pytest' in testing_frameworks %}
+- Use pytest for Python testing
+- Use fixtures for test data
+{% endif %}
+{% endif %}
+
+## Error Handling
+{% if language == 'JavaScript' %}
+- Use try/catch blocks for async operations
+- Implement proper error boundaries in React
+- Log errors appropriately for debugging
+{% elif language == 'Python' %}
+- Use specific exception types
+- Implement proper logging
+- Handle exceptions at appropriate levels
+{% endif %}
+
+## Performance Guidelines
+- Avoid premature optimization
+- Use profiling tools when performance issues arise
+- Implement caching where appropriate
+{% if 'react' in tech_stack %}
+- Use React.memo and useMemo for expensive operations
+- Implement proper key props for lists
+{% endif %}
+
+## Security Considerations
+- Validate all user inputs
+- Use environment variables for sensitive data
+- Implement proper authentication and authorization
+{% if databases %}
+- Use parameterized queries to prevent SQL injection
+{% endif %}
+- Keep dependencies updated
+
+## Build and Development
+{% for script, command in scripts.items() %}
+- {{ script }}: `{{ command }}`
+{% endfor %}
+
+## Environment Setup
+{% if environment_variables %}
+Required environment variables:
+{% for env_var in environment_variables %}
+- {{ env_var }}
+{% endfor %}
+{% endif %}
+
+## Database Interactions
+{% if databases %}
+{% for db in databases %}
+- {{ db.title() }}: Use established patterns for queries and migrations
+{% endfor %}
+{% endif %}
+
+## API Development
+{% if 'api' in directories or 'routes' in directories %}
+- Follow RESTful conventions
+- Implement proper status codes
+- Use consistent response formats
+- Document API endpoints
+{% endif %}
+
+## Documentation
+- Write clear and concise comments
+- Update README when adding new features
+- Document complex business logic
+- Keep API documentation current
+
+## Version Control
+- Use meaningful commit messages
+- Create feature branches for new work
+- Review code before merging
+- Keep commits atomic and focused
+
+---
+*Auto-generated rules for {{ project_name }}*

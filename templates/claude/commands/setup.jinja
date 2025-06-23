@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Setup command for {{ project_name }}
+
+echo "⚙️ Setting up {{ project_name }}"
+
+# Install dependencies
+{% if 'npm' in package_managers %}
+echo "📦 Installing npm dependencies..."
+npm install
+{% elif 'yarn' in package_managers %}
+echo "📦 Installing yarn dependencies..."
+yarn install
+{% elif 'pnpm' in package_managers %}
+echo "📦 Installing pnpm dependencies..."
+pnpm install
+{% elif 'poetry' in package_managers %}
+echo "📦 Installing poetry dependencies..."
+poetry install
+{% elif 'pip' in package_managers %}
+echo "📦 Installing pip dependencies..."
+pip install -r requirements.txt
+{% endif %}
+
+# Copy environment file if it doesn't exist
+{% if environment_variables %}
+if [ ! -f .env ]; then
+    if [ -f .env.example ]; then
+        echo "📋 Copying .env.example to .env"
+        cp .env.example .env
+        echo "⚠️  Please update .env with your configuration"
+    elif [ -f .env.template ]; then
+        echo "📋 Copying .env.template to .env"
+        cp .env.template .env
+        echo "⚠️  Please update .env with your configuration"
+    fi
+fi
+{% endif %}
+
+# Database setup
+{% if 'postgresql' in databases %}
+echo "🗄️  Setting up PostgreSQL database..."
+# Add database setup commands here
+{% endif %}
+
+{% if 'sqlite' in databases %}
+echo "🗄️  Setting up SQLite database..."
+# Add database setup commands here
+{% endif %}
+
+# Docker setup
+{% if docker_config %}
+echo "🐳 Building Docker containers..."
+docker-compose build
+{% endif %}
+
+echo "✅ Setup completed!"
+echo "💡 Run the development server with: ./dev"

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Development server command for {{ project_name }}
+
+echo "🚀 Starting development server for {{ project_name }}"
+
+{% if 'dev' in scripts %}
+{{ scripts.dev }}
+{% elif 'start' in scripts %}
+{{ scripts.start }}
+{% elif 'npm' in package_managers %}
+npm run dev
+{% elif 'poetry' in package_managers and language == 'Python' %}
+poetry run python -m uvicorn main:app --reload
+{% elif docker_config %}
+docker-compose up
+{% else %}
+echo "No development command configured"
+exit 1
+{% endif %}

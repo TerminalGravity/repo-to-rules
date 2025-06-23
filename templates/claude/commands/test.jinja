@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Test command for {{ project_name }}
+
+echo "🧪 Running tests for {{ project_name }}"
+
+{% if 'test' in scripts %}
+{{ scripts.test }}
+{% elif 'npm' in package_managers %}
+npm test
+{% elif 'pytest' in testing_frameworks %}
+pytest
+{% elif 'poetry' in package_managers %}
+poetry run pytest
+{% else %}
+echo "No test command configured"
+exit 1
+{% endif %}
+
+if [ $? -eq 0 ]; then
+    echo "✅ All tests passed!"
+else
+    echo "❌ Tests failed"
+    exit 1
+fi

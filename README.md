@@ -1,5 +1,7 @@
 # Repo to Rules Automation
 
+Feature Branch #1: Implement GitToDoc for `repo-to-rules` project
+
 An end-to-end automation system that analyzes GitHub repositories and generates comprehensive rule directories for both Claude Code and Cursor, leveraging Claude Sonnet 4, LangGraph, and the GitHub API.
 
 ## Features
